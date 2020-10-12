@@ -22,6 +22,8 @@ class ContactingTestCase(unittest.TestCase):
                 person.set_state(state(person))
             elif (random.random() > 0.5): #a half of healthy people have antibodies
                 person.antibody_types.add(type(get_random_virus()))
+            person.night_actions()
+            
 
     def tearDown(self):
         pass
@@ -51,7 +53,18 @@ class ContactingTestCase(unittest.TestCase):
                     t = type(p2.state)
                     p1.interact(p2)
                     self.assertEqual(type(p2.state), t)
-                    
-                    
+
+    def test_changingstate(self):
+        for p1 in self.persons:
+            if  (p1.days_sick ==1):
+                self.assertEqual(type(p1.state),AsymptomaticSick)
+            elif (p1.days_sick==2):
+                self.assertEqual(type(p1.state),SymptomaticSick)
+    def test_fromsick2healthy(self):
+        for p1 in self.persons:
+            if (p1.days_sick==2) and (p1.virus.strength >0):
+                self.assertEqual(type(p1.state),SymptomaticSick)
+            elif (p1.virus.strength <0):
+                self.assertEqual(type(p1.state),Healthy)
 if __name__ == '__main__':
     unittest.main()
