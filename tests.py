@@ -63,8 +63,8 @@ class ContactingTestCase(unittest.TestCase):
     def test_fromsick2healthy(self):
         for p1 in self.persons:
             if (p1.days_sick==2) and (p1.virus.strength >0):
-                self.assertEqual(type(p1.state),SymptomaticSick)
+                self.assertEqual(type(p1.state), SymptomaticSick)
             elif (p1.virus.strength <0):
-                self.assertEqual(type(p1.state),Healthy)
+                self.assertEqual(type(p1.state), Healthy)
 if __name__ == '__main__':
     unittest.main()
