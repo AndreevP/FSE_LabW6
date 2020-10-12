@@ -147,7 +147,8 @@ class SymptomaticSick(State):
             self.person.antibody_types.add(type(self.person.virus))
             self.person.virus = None
 
-    def interact(self, other): pass
+    def interact(self, other):
+        other.get_infected(self.person.virus)
 
     def get_infected(self, virus): pass
 
